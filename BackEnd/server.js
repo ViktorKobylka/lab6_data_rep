@@ -1,6 +1,17 @@
 const express = require('express');
 const app = express();
 const port = 4000;
+const cors = require('cors');
+app.use(cors());
+
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 app.get('/api/movies', (req, res) => {
     movies = [
@@ -26,7 +37,19 @@ app.get('/api/movies', (req, res) => {
           "Poster": "https://m.media-amazon.com/images/M/MV5BNDQ4YzFmNzktMmM5ZC00MDZjLTk1OTktNDE2ODE4YjM2MjJjXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
         }
       ];
-      res.status(200).json({movies});
+      res.status(200).json({movies})
+
+});
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.post('/api/movies', (req, res) => {
+   const title = req.query.Title;
+   const year = req.query.Year;
+   const poster = req.query.Poster;
+    res.send('$(title) $(year) $(poster) ' );
 
 });
 
