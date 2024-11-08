@@ -46,16 +46,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post('/api/movies', (req, res) => {
-    console.group(req.body.title);
-    console.group(req.body.year);
-    console.group(req.body.poster);
+    console.log(req.body.title);
+    console.log(req.body.year);
+    console.log(req.body.poster);
     res.send("Movie added");
-   //const title = req.body.Title;
-   //res.send('$(title)');
-  // const year = req.query.Year;
-  // const poster = req.query.Poster;
-//res.send('$(title) $(year) $(poster) ' );
-
+   
 });
 
 app.listen(port, () => {
