@@ -3,32 +3,21 @@ import { useState } from "react";
 
 const Create = () => {
 
-    const [title, setTitle] = useState('');
-    const [year, setYear] = useState('');
-    const [poster, setPoster] = useState('');
+    const [title, setTitle] = useState('');//state for movie title
+    const [year, setYear] = useState('');//state for movie year
+    const [poster, setPoster] = useState('');//state for poster URL
 
-    /*const handleSubmit = (e) => {
-        e.preventDefault();
-        const movie = {title,year,poster};
-        console.log(movie);
-    }*/
    
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault();//prevent default form submission
         
-        //console.log(`Title: ${title}, Year: ${year}, Poster: ${poster}`);
-        const movie = {title, year, poster};
+        const movie = {title, year, poster};//create movie object from values
         console.log(movie);
-        /*const movie = {
-        title: title,
-        year: year,
-        poster: poster
-        };*/
         
+        //send POST request to server
         axios.post('http://localhost:4000/api/movies', movie)
-        .then((res) => console.log(res.data))
+        .then((res) => console.log(res.data))//log server response
         .catch();
-        //.catch((err) => console.log(err.data));
     };
 
     return (

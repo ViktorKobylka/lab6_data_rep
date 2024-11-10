@@ -4,7 +4,7 @@ const port = 4000;
 const cors = require('cors');
 app.use(cors());
 
-
+//set headers to allow cross-origin requests and specific HTTP methods
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -12,7 +12,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-
+//define get route to serve movie data
 app.get('/api/movies', (req, res) => {
     movies = [
         {
@@ -37,14 +37,16 @@ app.get('/api/movies', (req, res) => {
           "Poster": "https://m.media-amazon.com/images/M/MV5BNDQ4YzFmNzktMmM5ZC00MDZjLTk1OTktNDE2ODE4YjM2MjJjXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
         }
       ];
-      res.status(200).json({movies})
+      res.status(200).json({movies})//respond with JSON movie data
 
 });
 
+//add body-parser middleware
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//define post route to add new movie
 app.post('/api/movies', (req, res) => {
     console.log(req.body.title);
     console.log(req.body.year);
@@ -53,6 +55,7 @@ app.post('/api/movies', (req, res) => {
    
 });
 
+//start server and log URL
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });

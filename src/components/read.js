@@ -7,7 +7,7 @@ const Read = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/movies')
+    axios.get('http://localhost:4000/api/movies')//GET request to retrieve movies
       .then((response) => {
         console.log(response.data);
         setMovies(response.data.movies);
